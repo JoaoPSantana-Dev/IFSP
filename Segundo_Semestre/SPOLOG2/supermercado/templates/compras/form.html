@@ -1,0 +1,346 @@
+{% extends "base.html" %}
+
+
+{% block conteudo %}
+
+
+{% if compra %}
+
+<h2>
+    Alterar Compra numero {{ compra["id"] }}
+</h2>
+
+{% else %}
+
+<h2>
+    Caixa a Nova Compra
+</h2>
+
+{% endif %}
+
+
+<form
+    method="POST"
+    class="formulario"
+>
+
+
+    <div>
+
+        <label>
+            Cliente
+        </label>
+
+        <input
+            type="text"
+            name="cliente"
+            required
+            placeholder="Nome do comprador"
+            value="{{ compra['cliente']
+                     if compra else '' }}"
+        >
+
+    </div>
+
+
+    <h3>
+        Produtos
+    </h3>
+
+
+    <div class="tabela-responsiva">
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Produto</th>
+
+                <th>Quantidade</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+        {% for i in range(6) %}
+
+
+            {% if i < itens|length %}
+
+                {% set item = itens[i] %}
+
+            {% else %}
+
+                {% set item = None %}
+
+            {% endif %}
+
+
+            <tr>
+
+                <td>
+
+                    <select
+                        name="produto_id"
+                    >
+
+                        <option value="">
+                            Selecione um produto
+                        </option>
+
+
+                        {% for produto in produtos %}
+
+                        <option
+                            value="{{ produto['id'] }}"
+
+                            {% if item and
+                                  item['produto_id']
+                                  == produto['id'] %}
+
+                                selected
+
+                            {% endif %}
+                        >
+
+                            {{ produto["categoria"] }}
+                            -
+                            {{ produto["nome"] }}
+
+                            |
+                            R$
+                            {{ "%.2f"|format(
+                                produto["preco"]
+                            ) }}
+
+                            |
+                            Estoque:
+                            {{ produto["estoque"] }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </td>
+
+
+                <td>
+
+                    <input
+                        type="number"
+                        name="quantidade"
+                        min="0"
+                        value="{{ item['quantidade']
+                                 if item else 0 }}"
+                    >
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    </div>
+
+
+    <div class="aviso">
+
+        O valor total e calculado automaticamente
+        pelo servidor utilizando o preco cadastrado
+        dos produtos.
+
+    </div>
+
+
+    <div class="acoes">
+
+        <button
+            type="submit"
+            class="botao verde"
+        >
+
+            {% if compra %}
+
+                Salvar Alteracoes
+
+            {% else %}
+
+                Finalizar Compra
+
+            {% endif %}
+
+        </button>
+
+
+        <a
+            class="botao secundario"
+            href="{{ url_for('listar_compras') }}"
+        >
+            Cancelar
+        </a>
+
+    </div>
+
+</form>
+
+{% endblock %}
+
+
+{% extends "base.html" %}
+
+
+{% block conteudo %}
+
+<h2>
+    Compra numero {{ compra["id"] }}
+</h2>
+
+
+<div class="dados-compra">
+
+    <p>
+
+        <strong>Cliente:</strong>
+
+        {{ compra["cliente"] }}
+
+    </p>
+
+
+    <p>
+
+        <strong>Data/Hora:</strong>
+
+        {{ compra["data_hora"] }}
+
+    </p>
+
+</div>
+
+
+<h3>
+    Produtos
+</h3>
+
+
+<div class="tabela-responsiva">
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>Produto</th>
+
+            <th>Quantidade</th>
+
+            <th>Preco Unitario</th>
+
+            <th>Subtotal</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {% for item in itens %}
+
+        <tr>
+
+            <td>
+                {{ item["produto_nome"] }}
+            </td>
+
+            <td>
+                {{ item["quantidade"] }}
+            </td>
+
+            <td>
+
+                R$
+                {{ "%.2f"|format(
+                    item["preco_unitario"]
+                ) }}
+
+            </td>
+
+            <td>
+
+                R$
+                {{ "%.2f"|format(
+                    item["subtotal"]
+                ) }}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+
+    <tfoot>
+
+        <tr>
+
+            <th colspan="3">
+                TOTAL
+            </th>
+
+            <th>
+
+                R$
+                {{ "%.2f"|format(
+                    compra["total"]
+                ) }}
+
+            </th>
+
+        </tr>
+
+    </tfoot>
+
+</table>
+
+</div>
+
+
+<div class="acoes">
+
+    <a
+        class="botao editar"
+        href="{{ url_for(
+            'editar_compra',
+            id=compra['id']
+        ) }}"
+    >
+        Alterar Compra
+    </a>
+
+
+    <a
+        class="botao"
+        href="{{ url_for('listar_compras') }}"
+    >
+        Voltar
+    </a>
+
+</div>
+
+{% endblock %}
+

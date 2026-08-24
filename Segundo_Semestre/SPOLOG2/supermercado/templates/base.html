@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Supermercado MPA
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="container">
+
+        <h1>
+            Sistema de Supermercado
+        </h1>
+
+        <nav>
+
+            <a href="{{ url_for('index') }}">
+                Inicio
+            </a>
+
+            <a href="{{ url_for('listar_produtos') }}">
+                Produtos
+            </a>
+
+            <a href="{{ url_for('novo_produto') }}">
+                Cadastrar Produto
+            </a>
+
+            <a href="{{ url_for('listar_compras') }}">
+                Compras
+            </a>
+
+            <a href="{{ url_for('nova_compra') }}">
+                Caixa
+            </a>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main class="container">
+
+    {% with mensagens = get_flashed_messages() %}
+
+        {% if mensagens %}
+
+            {% for mensagem in mensagens %}
+
+                <div class="mensagem">
+                    {{ mensagem }}
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    {% block conteudo %}
+
+    {% endblock %}
+
+</main>
+
+
+<footer>
+
+    Sistema academico desenvolvido com
+    Python + Flask + SQLite.
+
+</footer>
+
+</body>
+
+</html>
+

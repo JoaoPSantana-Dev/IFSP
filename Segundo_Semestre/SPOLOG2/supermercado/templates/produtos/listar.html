@@ -1,0 +1,208 @@
+{% extends "base.html" %}
+
+
+{% block conteudo %}
+
+<div class="titulo-linha">
+
+    <h2>
+        Produtos cadastrados
+    </h2>
+
+    <a
+        class="botao verde"
+        href="{{ url_for('novo_produto') }}"
+    >
+        Novo Produto
+    </a>
+
+</div>
+
+
+<form
+    method="GET"
+    class="pesquisa"
+>
+
+    <div>
+
+        <label>
+            Produto ou fabricante
+        </label>
+
+        <input
+            type="text"
+            name="q"
+            value="{{ pesquisa }}"
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Categoria
+        </label>
+
+        <input
+            type="text"
+            name="categoria"
+            value="{{ categoria }}"
+        >
+
+    </div>
+
+
+    <div class="campo-botao">
+
+        <button
+            type="submit"
+            class="botao"
+        >
+            Consultar
+        </button>
+
+    </div>
+
+</form>
+
+
+<div class="acoes">
+
+    <a
+        class="botao excel"
+        href="{{ url_for('exportar_produtos') }}"
+    >
+        Exportar XLSX
+    </a>
+
+</div>
+
+
+<div class="tabela-responsiva">
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th>ID</th>
+
+            <th>Categoria</th>
+
+            <th>Produto</th>
+
+            <th>Fabricante</th>
+
+            <th>Unidade</th>
+
+            <th>Preco</th>
+
+            <th>Estoque</th>
+
+            <th>Acoes</th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+        {% for produto in produtos %}
+
+        <tr>
+
+            <td>
+                {{ produto["id"] }}
+            </td>
+
+            <td>
+                {{ produto["categoria"] }}
+            </td>
+
+            <td>
+                {{ produto["nome"] }}
+            </td>
+
+            <td>
+                {{ produto["fabricante"] }}
+            </td>
+
+            <td>
+                {{ produto["unidade"] }}
+            </td>
+
+            <td>
+
+                R$
+                {{ "%.2f"|format(produto["preco"]) }}
+
+            </td>
+
+            <td>
+                {{ produto["estoque"] }}
+            </td>
+
+            <td class="acoes-tabela">
+
+                <a
+                    class="botao pequeno"
+                    href="{{ url_for(
+                        'editar_produto',
+                        id=produto['id']
+                    ) }}"
+                >
+                    Alterar
+                </a>
+
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'excluir_produto',
+                        id=produto['id']
+                    ) }}"
+                    onsubmit="return confirm(
+                        'Excluir este produto?'
+                    );"
+                >
+
+                    <button
+                        type="submit"
+                        class="botao excluir pequeno"
+                    >
+                        Excluir
+                    </button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+        {% else %}
+
+        <tr>
+
+            <td
+                colspan="8"
+                class="centralizado"
+            >
+                Nenhum produto encontrado.
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
+

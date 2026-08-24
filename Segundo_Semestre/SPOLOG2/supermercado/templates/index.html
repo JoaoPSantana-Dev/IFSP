@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+
+{% block conteudo %}
+
+<h2>
+    Painel principal
+</h2>
+
+
+<div class="cards">
+
+    <div class="card">
+
+        <h3>
+            Produtos
+        </h3>
+
+        <p class="numero">
+            {{ quantidade_produtos }}
+        </p>
+
+        <a
+            class="botao"
+            href="{{ url_for('listar_produtos') }}"
+        >
+            Consultar
+        </a>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            Compras
+        </h3>
+
+        <p class="numero">
+            {{ quantidade_compras }}
+        </p>
+
+        <a
+            class="botao"
+            href="{{ url_for('listar_compras') }}"
+        >
+            Consultar
+        </a>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>
+            Faturamento
+        </h3>
+
+        <p class="numero">
+
+            R$
+            {{ "%.2f"|format(faturamento) }}
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<h2>
+    Operacoes
+</h2>
+
+
+<div class="acoes">
+
+    <a
+        class="botao"
+        href="{{ url_for('novo_produto') }}"
+    >
+        Novo Produto
+    </a>
+
+
+    <a
+        class="botao verde"
+        href="{{ url_for('nova_compra') }}"
+    >
+        Abrir Caixa
+    </a>
+
+</div>
+
+{% endblock %}
+

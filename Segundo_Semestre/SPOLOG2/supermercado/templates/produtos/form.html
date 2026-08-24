@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+
+
+{% block conteudo %}
+
+
+{% if produto %}
+
+<h2>
+    Alterar Produto
+</h2>
+
+{% else %}
+
+<h2>
+    Cadastrar Produto
+</h2>
+
+{% endif %}
+
+
+<form
+    method="POST"
+    class="formulario"
+>
+
+    <div>
+
+        <label>
+            Nome do produto
+        </label>
+
+        <input
+            type="text"
+            name="nome"
+            required
+            value="{{ produto['nome'] if produto else '' }}"
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Categoria
+        </label>
+
+        <select
+            name="categoria"
+            required
+        >
+
+            <option value="">
+                Selecione
+            </option>
+
+            {% set categorias = [
+                "Alimentos",
+                "Bebidas",
+                "Higiene",
+                "Limpeza",
+                "Frios",
+                "Hortifruti",
+                "Padaria",
+                "Congelados",
+                "Outros"
+            ] %}
+
+
+            {% for categoria in categorias %}
+
+            <option
+                value="{{ categoria }}"
+
+                {% if produto and
+                      produto['categoria'] == categoria %}
+
+                    selected
+
+                {% endif %}
+            >
+
+                {{ categoria }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Fabricante
+        </label>
+
+        <input
+            type="text"
+            name="fabricante"
+            required
+            value="{{ produto['fabricante']
+                     if produto else '' }}"
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Unidade
+        </label>
+
+        <select
+            name="unidade"
+            required
+        >
+
+            {% set unidades = [
+                "Unidade",
+                "Pacote",
+                "Caixa",
+                "Kg",
+                "Litro",
+                "Garrafa",
+                "Lata"
+            ] %}
+
+            {% for unidade in unidades %}
+
+            <option
+                value="{{ unidade }}"
+
+                {% if produto and
+                      produto['unidade'] == unidade %}
+
+                    selected
+
+                {% endif %}
+            >
+
+                {{ unidade }}
+
+            </option>
+
+            {% endfor %}
+
+        </select>
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Pre�o unit�rio
+        </label>
+
+        <input
+            type="text"
+            name="preco"
+            placeholder="Exemplo: 10,50"
+            required
+            value="{{ produto['preco']
+                     if produto else '' }}"
+        >
+
+    </div>
+
+
+    <div>
+
+        <label>
+            Quantidade em estoque
+        </label>
+
+        <input
+            type="number"
+            name="estoque"
+            min="0"
+            required
+            value="{{ produto['estoque']
+                     if produto else '0' }}"
+        >
+
+    </div>
+
+
+    <div class="acoes">
+
+        <button
+            class="botao verde"
+            type="submit"
+        >
+
+            {% if produto %}
+
+                Salvar Altera��es
+
+            {% else %}
+
+                Cadastrar Produto
+
+            {% endif %}
+
+        </button>
+
+
+        <a
+            class="botao secundario"
+            href="{{ url_for('listar_produtos') }}"
+        >
+            Cancelar
+        </a>
+
+    </div>
+
+</form>
+
+{% endblock %}
+
