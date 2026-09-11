@@ -1,0 +1,40 @@
+#include <stdio.h>
+void xprint (int * array, int size){
+int i;
+printf("\n\n[");
+for (i=0; i<size; i++)
+if (i==size-1)
+printf("%i]", array[i]);
+else printf("%i,", array[i]);
+}
+void xsort(int *array, int size) {
+int step, key, j;
+for (step = 1; step < size; step++) {
+key = array[step];
+j = step - 1;
+while (j >= 0 && key < array[j]) {
+array[j + 1] = array[j];
+j--;
+}
+array[j + 1] = key;
+xprint(array, 5);
+}
+}
+int main(){
+int dados[5] = { 2, 5, 1, 4, 3 }, i;
+xsort(dados, 5);
+return 0;
+}
+Considere a seguinte saída do código apresentado:
+[2, 5, 1, 4, 3]
+[1, 2, 5, 4, 3]
+[1, 2, 4, 5, 3]
+[1, 2, 3, 4, 5]
+O algoritmo de ordenação implementado no código apresentado é o:
+(__) A) Heap Sort.
+(__) B) Merge Sort.
+(__) C)Bubble Sort.
+(__) D) Insertion Sort.
+(__) E) Selection Sort.
+
+Respota é a D, insertion sort pois a variavel armazena o elemento atual que está sendo analisado e compara com os elemntos anteriores

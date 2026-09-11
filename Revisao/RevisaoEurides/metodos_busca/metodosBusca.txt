@@ -1,0 +1,64 @@
+Classificar dados, em ciência da computação, trata-se de colocar os elementos de uma dada sequência em uma certa ordem,
+podendo ser crescente ou decrescente, entre alguns métodos principais são:
+
+-Bubble sort
+-Selection sort
+-Insertion sort
+
+O objetivo de ordenar os dados é para acessar eles de forma mais eficiente como no caso de buscar um valor específico dentro
+da lista de dados.
+
+*Bubble sort
+O bubble sort é o algoritmo mais simples de ordenação, nele se percorre o vetor diversas vezes e a cada passagem faz o maior
+elementos da sequência se deslocar para o "fundo" do vetor.
+
+Características:
+
+-Em seu melhor caso atinge a complexidade O(n);
+
+-Em seu caso médio e pior atinge a complexidade de O(n²);
+
+-Sua principal vantagem é que é facil de fazer, porém é lento pra cacete;
+
+
+*Selection sort
+A ordenação por seleção é um algoritmo de ordenação que consiste em passar sempre o menor valor do vetor para a primeira posição e depois o segundo
+menor valor para a segunda posição e assim em diante.
+
+Características:
+
+-Para todos os casos possui complexidade O(n²) e não é estável
+
+Vantagens:
+
+-É simples em ser implementado
+-Não necessita de um vetor auxiliar
+-Ocupa menos espaço de memória
+-Ele é um dos mais velozes em ordenação de pequenas listas
+
+Desvantagens:
+
+-Ele é um dos mais lentos para vetores grandes.
+-Ele não é estável(não preserva a ordem original que os elementos repetidos foram inseridos após a execução do processo)
+
+
+*Insertion sort 
+A ordernação de uma estrutura será construindo uma nova matriz ordenada inserindo um elemento de cada vez;
+
+Características
+
+- Este é um algoritmo eficiente para problemas com pequenas entradas
+- É de simples implementação, leitura e manutenção.
+- É estável
+- Ele efetua muitas trocas e menos comparações
+- Em seu melhor caso atinge a complexidade O(n) e no pior O(n²)
+
+Vantagens:
+
+- Recomendável para quando a estrutura já está 'quase ordenada'
+- É bom para quando se deseja adicionar poucos elementos em um arquivo já ordenado, pois seu custo é linear
+- O algoritmo de ordenação por inserção é estável
+
+Desvantagens
+
+- Alto custo de movimentação de elemento no vetor.
