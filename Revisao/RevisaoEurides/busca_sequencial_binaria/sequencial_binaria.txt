@@ -1,3 +1,0 @@
-São formas de buscar elementos em um array de elementos que já estão 
-ordenados, o sequencial vai ver cada elemento um de cada vez, já o binário
-vai repartir o array em duas partes e a cada comparação vai repartir o array pela metade.
