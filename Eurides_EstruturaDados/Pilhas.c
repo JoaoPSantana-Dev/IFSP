@@ -129,12 +129,5 @@ int main(){
 	
 	mostrar_tabela(produtos,20);
 	
-
-
-	
-	
-	
-	
-	
 	return 0;
 }
